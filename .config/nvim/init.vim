@@ -17,3 +17,6 @@ highlight Normal ctermbg=NONE guibg=NONE
 highlight LineNr ctermbg=NONE guibg=NONE
 highlight SignColumn ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
+
+" Auto generate tags file on file write of source files
+autocmd BufWritePost *.c,*.h,*.cpp,*.hpp,*.go,*.py silent! !ctags . &
