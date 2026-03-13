@@ -1,0 +1,10 @@
+[core]
+    editor = nvim
+[user]
+    name = "msshtdev"
+    email = "dev.msshta@proton.me" 
+    signingkey = "dev.msshta@proton.me"
+[gpg]
+    program = gpg
+[commit]
+    gpgsign = true

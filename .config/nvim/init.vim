@@ -2,6 +2,7 @@ set nocompatible
 filetype plugin on
 
 set number
+set hidden
 syntax on
 
 set tabstop=8
@@ -20,3 +21,11 @@ highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 " Auto generate tags file on file write of source files
 autocmd BufWritePost *.c,*.h,*.cpp,*.hpp,*.go,*.py silent! !ctags . &
+
+" Access buffer easily
+nnoremap <Leader>b :buffers<CR>:buffer<Space>
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>p :bp<CR>
+
+" Include sub-directories to search path
+set path=.,*/**,
