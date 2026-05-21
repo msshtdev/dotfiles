@@ -1,3 +1,5 @@
+let mapleader = " "
+
 set nocompatible
 filetype plugin on
 
@@ -9,6 +11,10 @@ set tabstop=8
 set shiftwidth=4
 set softtabstop=4
 set noexpandtab
+
+set path+=**
+set wildmenu
+set wildoptions=fuzzy "9.0<=
 
 
 " Make background transparent / use terminal background
@@ -27,5 +33,12 @@ nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 
-" Include sub-directories to search path
-set path=.,*/**,
+" Search files and words easily
+autocmd QuickFixCmdPost grep  copen 
+nnoremap <leader>g :silent grep!<Space>
+nnoremap <leader>f :find<Space>
+
+" Surroud when selected
+vnoremap ( <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap [ <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap { <ESC>`>a}<ESC>`<i{<ESC>
