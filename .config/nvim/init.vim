@@ -21,8 +21,8 @@ set wildoptions=fuzzy "9.0<=
 
 " Use ripgrep as grep tool in vim
 " May have to install ripgrep first
-set grepprg=rg\--vimgrep\--smart-case
-set grepformat=%f%:%l:%c:%m
+set grepprg=rg\ --vimgrep\ --smart-case
+set grepformat=%f:%l:%c:%m
 
 " Make background transparent / use terminal background
 set termguicolors
