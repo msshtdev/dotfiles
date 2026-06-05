@@ -1,48 +1,24 @@
-local configs = {
-    go = {
-        name     = "gopls",
-        cmd      = { "gopls" },
-        root_dir = vim.fs.dirname(
-            vim.fs.find({ "go.mod", "go.work" }, { upward = true })[1]
-        ),
-    },
-    python = {
-        name     = "pyright",
-        cmd      = { "pyright-langserver", "--stdio" },
-        root_dir = vim.fs.dirname(
-            vim.fs.find({ "pyproject.toml", "setup.py", ".git" }, { upward = true })[1]
-        ),
-    },
-    terraform = {
-        name     = "terraform-ls",
-        cmd      = { "terraform-ls", "serve" },
-        root_dir = vim.fs.dirname(
-            vim.fs.find({ ".terraform", "*.tf" }, { upward = true })[1]
-        ),
-    },
-    javascript = {
-        name     = "ts-language-server",
-        cmd      = { "typescript-language-server", "--stdio" },
-        root_dir = vim.fs.dirname(
-            vim.fs.find({ "package.json", ".git" }, { upward = true })[1]
-        ),
-    },
-    typescript = {
-        name     = "ts-language-server",
-        cmd      = { "typescript-language-server", "--stdio" },
-        root_dir = vim.fs.dirname(
-            vim.fs.find({ "package.json", ".git" }, { upward = true })[1]
-        ),
-    },
+local ts = { cmd = { "typescript-language-server", "--stdio" }, roots = { "package.json", ".git" } }
+
+local servers = {
+    go         = { cmd = { "gopls" },                         roots = { "go.mod", "go.work" } },
+    python     = { cmd = { "pyright-langserver", "--stdio" }, roots = { "pyproject.toml", "setup.py", ".git" } },
+    terraform  = { cmd = { "terraform-ls", "serve" },        roots = { ".terraform", "*.tf" } },
+    javascript = ts,
+    typescript = ts,
 }
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern  = vim.tbl_keys(configs),
+    pattern  = vim.tbl_keys(servers),
     callback = function()
-        local cfg = configs[vim.bo.filetype]
-        if cfg then
-            vim.lsp.start(cfg)
-            vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-        end
+        local s = servers[vim.bo.filetype]
+        vim.lsp.start({
+            name     = s.cmd[1],
+            cmd      = s.cmd,
+            root_dir = vim.fs.dirname(
+                vim.fs.find(s.roots, { upward = true, path = vim.api.nvim_buf_get_name(0) })[1]
+            ),
+        })
+        vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
     end,
 })
