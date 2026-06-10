@@ -23,3 +23,9 @@ if [ -d ~/.bashrc.d ]; then
     done
 fi
 unset rc
+
+# mark the start of the prompt for Tmux
+export PS1='\[\033]133;A\033\\\]'"$PS1"'\[\033]133;B\033\\\]'
+
+alias vim='nvim'
+alias as='ls'
