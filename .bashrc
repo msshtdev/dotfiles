@@ -24,8 +24,18 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# mark the start of the prompt for Tmux
+## USER SETTING
+
+# Set prompt with user, host, and working directory
+PS1='[\u@\h \W]\$ '
+
+# Wrap with OSC 133 markers for tmux copy-mode prompt navigation (J/K) 
 export PS1='\[\033]133;A\033\\\]'"$PS1"'\[\033]133;B\033\\\]'
 
+# use vi-mode
+set -o vi
+
+# alias
 alias vim='nvim'
 alias as='ls'
+
