@@ -156,5 +156,12 @@ vim.keymap.set("n", "gi", goto_last_insert, { noremap = true, silent = true })
 -- Quick Reference to the current file directory
 vim.keymap.set("n", "<Leader>e", ":e <C-r>=expand('%:h').'/'<CR>", { noremap = true })
 
--- LSP omni-completion
+-- LSP
 vim.keymap.set("i", "<C-n>", "<C-x><C-o>", { noremap = true })
+vim.keymap.set("n", "<Leader>ld", ":lua vim.diagnostic.open_float() <CR>", { noremap = true })
+
+-- Terminal mode
+vim.keymap.set("t", "<C-t>", "<C-\\><C-n>", { noremap = true })
+
+-- Lexplore
+vim.keymap.set("n", "<Leader>le", ":Lexplore 20", { noremap = true })
