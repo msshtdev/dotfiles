@@ -9,6 +9,7 @@ local servers = {
 }
 
 vim.api.nvim_create_autocmd("FileType", {
+    group    = vim.api.nvim_create_augroup("lsp", { clear = true }),
     pattern  = vim.tbl_keys(servers),
     callback = function()
         local s = servers[vim.bo.filetype]
